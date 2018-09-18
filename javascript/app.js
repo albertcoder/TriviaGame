@@ -1,62 +1,62 @@
 // ------------------------VARIABLES-----------------------//
 
-//questionOne object
-var questionOne = {
-    question: "Who holds the record for most points scored in a single game?",
-    option1: "Michael Jordan",
-    option2: "Wilt Chamberlain",
-    option3: "LeBron James",
-    option4: "Kobe Bryant",
-    correctAnswer: "Wilt Chamberlain"
-}
+// //questionOne object
+// var questionOne = {
+//     question: "Who holds the record for most points scored in a single game?",
+//     option1: "Michael Jordan",
+//     option2: "Wilt Chamberlain",
+//     option3: "LeBron James",
+//     option4: "Kobe Bryant",
+//     correctAnswer: "Wilt Chamberlain"
+// }
 
-//questionTwo object
-var questionTwo = {
-    question: "What player has the most career assists?",
-    option1: "Steve Nash",
-    option2: "Gary Payton",
-    option3: "Chris Paul",
-    option4: "John Stockton",
-    correctAnswer: "John Stockton"
-}
+// //questionTwo object
+// var questionTwo = {
+//     question: "What player has the most career assists?",
+//     option1: "Steve Nash",
+//     option2: "Gary Payton",
+//     option3: "Chris Paul",
+//     option4: "John Stockton",
+//     correctAnswer: "John Stockton"
+// }
 
-//questionThree object
+// //questionThree object
 
-var questionThree = {
-    question: "What player has the highest career 3-pt FG percentage?",
-    option1: "Ray Allen",
-    option2: "Stephen Curry",
-    option3: "Steve Kerr",
-    option4: "Reggie Miller",
-    correctAnswer: "Steve Kerr"
-}
+// var questionThree = {
+//     question: "What player has the highest career 3-pt FG percentage?",
+//     option1: "Ray Allen",
+//     option2: "Stephen Curry",
+//     option3: "Steve Kerr",
+//     option4: "Reggie Miller",
+//     correctAnswer: "Steve Kerr"
+// }
 
-//questionFour object
-var questionFour = {
-    question: "Who was the last player drafted by the Seattle Supersonics?",
-    option1: "Sasha Kahn",
-    option2: "Kevin Durant",
-    option3: "Russell Westbrook",
-    option4: "Carl Landry",
-    correctAnswer: "Sasha Kahn"
-}
+// //questionFour object
+// var questionFour = {
+//     question: "Who was the last player drafted by the Seattle Supersonics?",
+//     option1: "Sasha Kahn",
+//     option2: "Kevin Durant",
+//     option3: "Russell Westbrook",
+//     option4: "Carl Landry",
+//     correctAnswer: "Sasha Kahn"
+// }
 
-//questionFive object
-var questionFive = {
-    question: "What player won the most NBA championships in his career?",
-    option1: "Bill Russell",
-    option2: "LeBron James",
-    option3: "Larry Bird",
-    option4: "Magic Johnson",
-    correctAnswer: "Bill Russell"
-}
+// //questionFive object
+// var questionFive = {
+//     question: "What player won the most NBA championships in his career?",
+//     option1: "Bill Russell",
+//     option2: "LeBron James",
+//     option3: "Larry Bird",
+//     option4: "Magic Johnson",
+//     correctAnswer: "Bill Russell"
+// }
 
-// array to hold all question objects
-var questionsArray = [questionOne, questionTwo, questionThree, questionFour, questionFive];
+// // array to hold all question objects
+// var questionsArray = [questionOne, questionTwo, questionThree, questionFour, questionFive];
 
 
 // starting time for all questions
-var number = 30;
+var number = 50;
 
 //  Variable that will hold our interval ID when we execute
 //  the "run" function
@@ -78,7 +78,7 @@ var numCorrect = 0;
 var numIncorrect = 0;
 
 // count of unanswered answers
-var numUnanswered = 5;
+var numUnanswered = 10;
 
 
 
@@ -89,25 +89,24 @@ function init() {
     // page loads, with start button in middle
     // when start button is clicked -->
     $(".start-btn").on("click", function () {
+        $("#game-box").empty();
+        startTimer();
         var queryURL = "https://opentdb.com/api.php?amount=10";
         $.ajax({
             url: queryURL,
             method: "GET"
         })
-
-            //
             .then(function (response) {
                 var tenQuestionsArray = response.results;
-                console.log(tenQuestionsArray);
-
+                // console.log(tenQuestionsArray);
                 for (var i = 0; i < tenQuestionsArray.length; i++) {
                     var correctA = tenQuestionsArray[i]["correct_answer"];
                     console.log(correctA);
                     var incorrectArray = tenQuestionsArray[i]["incorrect_answers"];
                     incorrectArray.push(correctA);
-                    console.log(incorrectArray);
+                    // console.log(incorrectArray);
                     var question = tenQuestionsArray[i]["question"];
-                    console.log(question);
+                    // console.log(question);
                     var p0 = $("<p>");
                     p0.addClass("question");
                     p0.text(question);
@@ -117,15 +116,32 @@ function init() {
                         answerPara.addClass("answers");
                         answerPara.text(incorrectArray[index]);
                         $("#question-area").append(answerPara);
-                        // alert( index + ": " + value );
                     });
                 }
-
+                // checkAnswer();
+                $(".answers").on("click", function () {
+                    //store the text of the div user clicks in variable userAnswer
+                    var userAnswer = $(this).text();
+                    console.log(userAnswer);
+                    //check if userAnswer is equal to correctAnswer
+                    if (userAnswer == tenQuestionsArray[count].correct_answer) {
+                        $(this).css("background", "green");
+                        numCorrect++;
+                        console.log("numCorrect: " + numCorrect);
+                    }
+                    else {
+                        numIncorrect++;
+                        $(this).css("background", "red");
+                        console.log("numIncorrect: " + numIncorrect);
+                    }
+                    //
+                    numUnanswered--;
+                    console.log("numUnanswered: " + numUnanswered);
+                    // increase the count variable to move to next question when createQuestion function is called
+                    count++
+                    // createQuestion();
+                });
             });
-        $("#game-box").empty();
-        startTimer();
-        createQuestion();
-        checkAnswer();
     })
 }
 
@@ -180,25 +196,7 @@ function createQuestion() {
 
 // function to check if answer chosen by user is the correct answer
 function checkAnswer() {
-    $(".answers").on("click", function () {
-        //store the text of the div user clicks in variable userAnswer
-        var userAnswer = $(this).text();
-        //check if userAnswer is equal to correctAnswer
-        if (userAnswer == questionsArray[count].correctAnswer) {
-            numCorrect++;
-            console.log("numCorrect: " + numCorrect);
-        }
-        else {
-            numIncorrect++;
-            console.log("numIncorrect: " + numIncorrect);
-        }
-        //
-        numUnanswered--;
-        console.log("numUnanswered: " + numUnanswered);
-        // increase the count variable to move to next question when createQuestion function is called
-        count++
-        createQuestion();
-    });
+
 }
 
 function correctAnswers() {
