@@ -122,19 +122,81 @@ function stopTimer() {
     //empties all question and answer div to clear the page
     $("#timer").empty();
     $("#questioncounter").empty();
-    $("#question-area").remove();
-    $("#correct").html(numCorrect);
-    $("#incorrect").html(numIncorrect);
-    $("#unanswered").html(numUnanswered);
+    $("#question-area").empty();
+    $("#correct").text(numCorrect);
+    $("#incorrect").text(numIncorrect);
+    $("#unanswered").text(numUnanswered);
 
     showCorrectA();
 
     //create the 'play again' button
-    $("#questioncounter").html("<button id='playagain' class='btn btn-primary start-btn' type='submit'>Ready to play again?</button>")
+    $("#answer-area").html("<button id='playagain' class='btn btn-primary start-btn' type='submit'>Ready to play again?</button>");
 
     $("#playagain").on('click', function () {
-        console.log('test')
-        init();
+        number = 10;
+        count = 0;
+        questionNum = 0;
+        numCorrect = 0;
+        numIncorrect = 0;
+        numUnanswered = 10;
+        correctAnswers = [];
+        $("#answer-area").empty();
+        console.log('test');
+        $("#game-box").empty();
+        startTimer();
+        var queryURL = "https://opentdb.com/api.php?amount=10";
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        })
+            .then(function (response) {
+                var tenQuestionsArray = response.results;
+                // console.log(tenQuestionsArray);
+                for (var i = 0; i < tenQuestionsArray.length; i++) {
+                    var correctA = tenQuestionsArray[i]["correct_answer"];
+                    console.log(correctA);
+                    correctAnswers.push(correctA);
+                    var incorrectArray = tenQuestionsArray[i]["incorrect_answers"];
+                    incorrectArray.push(correctA);
+                    // console.log(incorrectArray);
+                    var question = tenQuestionsArray[i]["question"];
+                    // console.log(question);
+                    var p0 = $("<p>");
+                    p0.addClass("question");
+                    p0.text(question);
+                    $("#question-area").append(p0);
+                    $.each(incorrectArray, function (index, value) {
+                        var answerPara = $("<p>");
+                        answerPara.addClass("answers");
+                        answerPara.text(incorrectArray[index]);
+                        $("#question-area").append(answerPara);
+                    });
+                }
+                // checkAnswer();
+                $(".answers").on("click", function () {
+                    //store the text of the div user clicks in variable userAnswer
+                    var userAnswer = $(this).text();
+                    // console.log(userAnswer);
+                    //check if userAnswer is equal to correctAnswer
+                    if (userAnswer == tenQuestionsArray[count].correct_answer) {
+                        $(this).css("background", "green");
+                        numCorrect++;
+                        console.log("numCorrect: " + numCorrect);
+                    }
+                    else {
+                        numIncorrect++;
+                        $(this).css("background", "red");
+                        console.log("numIncorrect: " + numIncorrect);
+                    }
+                    //
+                    numUnanswered--;
+                    console.log("numUnanswered: " + numUnanswered);
+                    // increase the count variable to move to next question when createQuestion function is called
+                    count++
+                    // createQuestion();
+                });
+            });
+
     })
 }
 
@@ -149,7 +211,7 @@ function checkAnswer() {
 }
 
 function showCorrectA() {
-        console.log(correctAnswers);
+    console.log(correctAnswers);
 
 }
 

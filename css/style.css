@@ -33,7 +33,7 @@ body{
 
 
 .timer{
-    color: darkred;
+    color: darkslategrey;
     font-size: 48px;
 }
 
@@ -85,15 +85,17 @@ body{
 
 .tracker{
     font-size: 28px;
-    color: white;
+    color: darkgrey;
 }
 
 #correct{
     text-align: center;
+    color: green;
 }
 
 #incorrect{
     text-align: center;
+    color: red;
 }
 
 .answers:hover{
