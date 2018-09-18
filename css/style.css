@@ -1,0 +1,115 @@
+body{
+    font-family: 'Play', sans-serif;
+}
+
+.parallax {
+    /* The image used */
+    /* background-image: url(../images/bballcourt.jpg); */
+
+    /* Set a specific height */
+    min-height: 500px; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container-fluid{
+    /* background-image: url(../images/bballcourt.jpg); */
+    background-color: white;
+    background-size: 100%;
+}
+
+.row {
+    height: 200px;
+    text-align: center;
+}
+
+#game{
+    height:400px;
+}
+
+
+.timer{
+    color: darkred;
+    font-size: 48px;
+}
+
+.space{
+    height: 80px;
+}
+/* .col-md-2{
+    border: 2px solid white;
+} */
+
+#title{
+    font-size: 36px;
+    text-align: center;
+    height: 200px;
+    color: white;
+}
+
+.counter{
+    color: white;
+    font-size: 20px;
+    font-style: italic;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.start-btn{
+    font-size: 24px;
+    width: 400px;
+    background-color: darkblue;
+    border-color: darkblue;
+}
+
+.start-btn:hover{
+    background-color:#2B547E;
+    border-color: #2B547E;
+}
+
+.question{
+    color:darkgrey;
+    font-size: 28px;
+    padding-top: 10px;
+}
+.answers{
+    color:darkgrey;
+    font-size:24px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.tracker{
+    font-size: 28px;
+    color: white;
+}
+
+#correct{
+    text-align: center;
+}
+
+#incorrect{
+    text-align: center;
+}
+
+.answers:hover{
+    border: 0.1px solid white;
+    background-color: #2b2b2b;
+}
+
+
+.q1answer{
+    background-image: url(../images/wilt.jpeg);
+}
+
+
+.finalanswers{
+    color: white;
+    font-size:20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Trivia</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Container for background image -->
+    <!-- Game container -->
+    <!-- Button to start game -->
+
+    <div class="container-fluid parallax">
+        <div class="row space">
+        </div>
+        <!-- <div class="row">
+            <div class="col-md-12">
+                <div id="title">Are you Ready?</div>
+            </div>
+        </div> -->
+        <div class="row" id="game">
+            <div class="col-md-2 tracker">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            Questions Correct:
+                        </div>
+                        <div id="correct">
+                            ?
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            Questions Incorrect:
+                        </div>
+                        <div id="incorrect">
+                            ?
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            Unanswered Questions:
+                        </div>
+                        <div id="unanswered">
+                            ?
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div id="game-box"><button class="btn btn-primary start-btn" type="submit">Start</button></div>
+                <div id="question-area" class="question-box">
+                </div>
+                <div id="answer-area" ></div>
+            </div>
+            <div class="col-md-2 tracker">
+                Timer:
+                <div id="timer"></div>
+            </div>
+
+        </div>
+        <div class="row"></div>
+    </div>
+    <script src="javascript/app.js" async defer></script>
+</body>
+
+</html>
