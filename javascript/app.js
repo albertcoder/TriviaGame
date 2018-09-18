@@ -1,62 +1,7 @@
 // ------------------------VARIABLES-----------------------//
 
-// //questionOne object
-// var questionOne = {
-//     question: "Who holds the record for most points scored in a single game?",
-//     option1: "Michael Jordan",
-//     option2: "Wilt Chamberlain",
-//     option3: "LeBron James",
-//     option4: "Kobe Bryant",
-//     correctAnswer: "Wilt Chamberlain"
-// }
-
-// //questionTwo object
-// var questionTwo = {
-//     question: "What player has the most career assists?",
-//     option1: "Steve Nash",
-//     option2: "Gary Payton",
-//     option3: "Chris Paul",
-//     option4: "John Stockton",
-//     correctAnswer: "John Stockton"
-// }
-
-// //questionThree object
-
-// var questionThree = {
-//     question: "What player has the highest career 3-pt FG percentage?",
-//     option1: "Ray Allen",
-//     option2: "Stephen Curry",
-//     option3: "Steve Kerr",
-//     option4: "Reggie Miller",
-//     correctAnswer: "Steve Kerr"
-// }
-
-// //questionFour object
-// var questionFour = {
-//     question: "Who was the last player drafted by the Seattle Supersonics?",
-//     option1: "Sasha Kahn",
-//     option2: "Kevin Durant",
-//     option3: "Russell Westbrook",
-//     option4: "Carl Landry",
-//     correctAnswer: "Sasha Kahn"
-// }
-
-// //questionFive object
-// var questionFive = {
-//     question: "What player won the most NBA championships in his career?",
-//     option1: "Bill Russell",
-//     option2: "LeBron James",
-//     option3: "Larry Bird",
-//     option4: "Magic Johnson",
-//     correctAnswer: "Bill Russell"
-// }
-
-// // array to hold all question objects
-// var questionsArray = [questionOne, questionTwo, questionThree, questionFour, questionFive];
-
-
 // starting time for all questions
-var number = 50;
+var number = 10;
 
 //  Variable that will hold our interval ID when we execute
 //  the "run" function
@@ -80,6 +25,9 @@ var numIncorrect = 0;
 // count of unanswered answers
 var numUnanswered = 10;
 
+// correct answers array
+var correctAnswers = [];
+
 
 
 // ------------------------FUNCTIONS-----------------------//
@@ -102,6 +50,7 @@ function init() {
                 for (var i = 0; i < tenQuestionsArray.length; i++) {
                     var correctA = tenQuestionsArray[i]["correct_answer"];
                     console.log(correctA);
+                    correctAnswers.push(correctA);
                     var incorrectArray = tenQuestionsArray[i]["incorrect_answers"];
                     incorrectArray.push(correctA);
                     // console.log(incorrectArray);
@@ -122,7 +71,7 @@ function init() {
                 $(".answers").on("click", function () {
                     //store the text of the div user clicks in variable userAnswer
                     var userAnswer = $(this).text();
-                    console.log(userAnswer);
+                    // console.log(userAnswer);
                     //check if userAnswer is equal to correctAnswer
                     if (userAnswer == tenQuestionsArray[count].correct_answer) {
                         $(this).css("background", "green");
@@ -173,12 +122,12 @@ function stopTimer() {
     //empties all question and answer div to clear the page
     $("#timer").empty();
     $("#questioncounter").empty();
-    $("#question,#answerone,#answertwo,#answerthree,#answerfour,#answervive").remove();
+    $("#question-area").remove();
     $("#correct").html(numCorrect);
     $("#incorrect").html(numIncorrect);
     $("#unanswered").html(numUnanswered);
 
-    correctAnswers();
+    showCorrectA();
 
     //create the 'play again' button
     $("#questioncounter").html("<button id='playagain' class='btn btn-primary start-btn' type='submit'>Ready to play again?</button>")
@@ -199,14 +148,9 @@ function checkAnswer() {
 
 }
 
-function correctAnswers() {
-    //add the correct answers
-    $("#question").html("The correct answers are: ").addClass('finalanswers');
-    $("#correctanswerone").html("1: " + questionOne.question + " " + questionOne.correctAnswer).addClass('finalanswers');
-    $("#correctanswertwo").html("2: " + questionTwo.question + " " + questionTwo.correctAnswer).addClass('finalanswers');
-    $("#correctanswerthree").html("3: " + questionThree.question + " " + questionThree.correctAnswer).addClass('finalanswers');
-    $("#correctanswerfour").html("4: " + questionFour.question + " " + questionFour.correctAnswer).addClass('finalanswers');
-    $("#correctanswerfive").html("5: " + questionFive.question + " " + questionFive.correctAnswer).addClass('finalanswers');
+function showCorrectA() {
+        console.log(correctAnswers);
+
 }
 
 
