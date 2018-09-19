@@ -32,9 +32,15 @@ body{
 }
 
 
-.timer{
+#timer{
     color: darkslategrey;
     font-size: 48px;
+}
+
+#stick {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
 }
 
 .space{
@@ -103,12 +109,6 @@ body{
     background-color: #2b2b2b;
     cursor: pointer;
 }
-
-
-.q1answer{
-    background-image: url(../images/wilt.jpeg);
-}
-
 
 .finalanswers{
     color: white;

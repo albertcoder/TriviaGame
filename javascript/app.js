@@ -1,7 +1,7 @@
 // ------------------------VARIABLES-----------------------//
 
 // starting time for all questions
-var number = 10;
+var number = 300;
 
 //  Variable that will hold our interval ID when we execute
 //  the "run" function
@@ -55,8 +55,9 @@ function init() {
                     incorrectArray.push(correctA);
                     // console.log(incorrectArray);
                     var question = tenQuestionsArray[i]["question"];
-                    // console.log(question);
+                    console.log(question);
                     var p0 = $("<p>");
+                    var space = $("<br><br><br>");
                     p0.addClass("question");
                     p0.text(question);
                     $("#question-area").append(p0);
@@ -66,6 +67,7 @@ function init() {
                         answerPara.text(incorrectArray[index]);
                         $("#question-area").append(answerPara);
                     });
+                    $("#question-area").append(space);
                 }
                 // checkAnswer();
                 $(".answers").on("click", function () {
@@ -75,6 +77,8 @@ function init() {
                     //check if userAnswer is equal to correctAnswer
                     if (userAnswer == tenQuestionsArray[count].correct_answer) {
                         $(this).css("background", "green");
+                        console.log(this);
+                        $(this).siblings(".answers").css("background", "red");
                         numCorrect++;
                         console.log("numCorrect: " + numCorrect);
                     }
@@ -151,7 +155,7 @@ function stopTimer() {
         })
             .then(function (response) {
                 var tenQuestionsArray = response.results;
-                // console.log(tenQuestionsArray);
+                console.log(tenQuestionsArray);
                 for (var i = 0; i < tenQuestionsArray.length; i++) {
                     var correctA = tenQuestionsArray[i]["correct_answer"];
                     console.log(correctA);
@@ -180,6 +184,7 @@ function stopTimer() {
                     //check if userAnswer is equal to correctAnswer
                     if (userAnswer == tenQuestionsArray[count].correct_answer) {
                         $(this).css("background", "green");
+                        // $(this).siblings( ".answers" ).css( "background", "red" );
                         numCorrect++;
                         console.log("numCorrect: " + numCorrect);
                     }
